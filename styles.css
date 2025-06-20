@@ -1,0 +1,28 @@
+body {
+    background-color: #F5E1A4; /* light pastel typical of old webpages */
+    color: #000080;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: url('https://www.transparenttextures.com/patterns/45-degree-fabric-dark.png');
+    color: #FFFFFF;
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 5px dashed #FF00FF;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background-color: #000080;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.8em;
+    border-top: 5px dashed #FF00FF;
+}
