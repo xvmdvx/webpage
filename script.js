@@ -8,6 +8,38 @@ context2.scale(20, 20);
 
 const scoreElem1 = document.getElementById('score1');
 const scoreElem2 = document.getElementById('score2');
+const overlay = document.getElementById('overlay');
+const overlayMsg = document.getElementById('overlay-message');
+const highScoresElem = document.getElementById('highScores');
+
+const maxHighScores = 5;
+
+function getHighScores() {
+    return JSON.parse(localStorage.getItem('tetrisHighScores') || '[]');
+}
+
+function saveHighScores(scores) {
+    localStorage.setItem('tetrisHighScores', JSON.stringify(scores));
+}
+
+function updateHighScores() {
+    const scores = getHighScores();
+    highScoresElem.innerHTML = '<h2>HIGH SCORES</h2>' +
+        scores.map(s => `<div>${s.name}: ${s.score}</div>`).join('');
+}
+
+function checkHighScore(score) {
+    const scores = getHighScores();
+    if (scores.length < maxHighScores || score > scores[scores.length - 1].score) {
+        const name = prompt('Iniciales para ' + score);
+        if (name) {
+            scores.push({name: name.toUpperCase().slice(0,3), score});
+            scores.sort((a,b) => b.score - a.score);
+            scores.splice(maxHighScores);
+            saveHighScores(scores);
+        }
+    }
+}
 
 function createMatrix(w, h) {
     const matrix = [];
@@ -99,6 +131,7 @@ function collide(arena, player) {
 }
 
 function arenaSweep(arena, player) {
+    let cleared = 0;
     outer: for (let y = arena.length - 1; y > 0; --y) {
         for (let x = 0; x < arena[y].length; ++x) {
             if (arena[y][x] === 0) {
@@ -109,6 +142,12 @@ function arenaSweep(arena, player) {
         arena.unshift(row);
         ++y;
         player.score += 10;
+        cleared++;
+    }
+    if (!player.lines) player.lines = 0;
+    player.lines += cleared;
+    if (cleared > 0 && player.lines % 10 === 0 && dropInterval > 200) {
+        dropInterval -= 100;
     }
 }
 
@@ -132,8 +171,7 @@ function playerReset(player) {
     player.pos.x = (player.arena[0].length / 2 | 0) -
                    (player.matrix[0].length / 2 | 0);
     if (collide(player.arena, player)) {
-        player.arena.forEach(row => row.fill(0));
-        player.score = 0;
+        gameOver();
     }
 }
 
@@ -201,6 +239,31 @@ const player2 = {
 let dropCounter = 0;
 let dropInterval = 1000;
 let lastTime = 0;
+let gameRunning = false;
+
+function startGame() {
+    [player1, player2].forEach(p => {
+        p.arena.forEach(row => row.fill(0));
+        p.score = 0;
+        p.lines = 0;
+        playerReset(p);
+    });
+    updateScore();
+    updateHighScores();
+    dropInterval = 1000;
+    lastTime = 0;
+    gameRunning = true;
+    overlay.classList.add('hidden');
+    requestAnimationFrame(update);
+}
+
+function gameOver() {
+    gameRunning = false;
+    [player1, player2].forEach(p => checkHighScore(p.score));
+    updateHighScores();
+    overlayMsg.textContent = 'GAME OVER - ESPACIO PARA REINICIAR';
+    overlay.classList.remove('hidden');
+}
 
 function draw() {
     [player1, player2].forEach(p => {
@@ -208,11 +271,14 @@ function draw() {
         p.context.fillRect(0, 0, canvas1.width, canvas1.height);
 
         drawMatrix(p.context, p.arena, {x:0, y:0});
-        drawMatrix(p.context, p.matrix, p.pos);
+        if (p.matrix) {
+            drawMatrix(p.context, p.matrix, p.pos);
+        }
     });
 }
 
 function update(time = 0) {
+    if (!gameRunning) return;
     const deltaTime = time - lastTime;
     lastTime = time;
 
@@ -229,9 +295,15 @@ function update(time = 0) {
 function updateScore() {
     scoreElem1.innerText = player1.score;
     scoreElem2.innerText = player2.score;
+    updateHighScores();
 }
 
 document.addEventListener('keydown', event => {
+    if (!gameRunning && event.code === 'Space') {
+        startGame();
+        return;
+    }
+    if (!gameRunning) return;
     switch (event.key) {
         case 'ArrowLeft':
             playerMove(player1, -1);
@@ -264,7 +336,6 @@ document.addEventListener('keydown', event => {
     }
 });
 
-playerReset(player1);
-playerReset(player2);
-updateScore();
-update();
+draw();
+updateHighScores();
+overlayMsg.textContent = 'INSERT COIN - PRESIONA ESPACIO';

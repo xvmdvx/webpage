@@ -1,10 +1,10 @@
 # webpage
 
-Aplicación web de Tetris con estilo noventero. Ahora incluye modo para uno o dos jugadores.
+Aplicación web de Tetris con un aspecto de arcade setentero. Cuenta con modo para uno o dos jugadores, tabla de puntuaciones y pantalla de inicio.
 
 ## Archivos
 - `index.html`: estructura principal de la página.
-- `style.css`: estilos con inspiración de los 90s.
+- `style.css`: estilos con estética setentera.
 - `script.js`: lógica del juego para uno o dos jugadores.
 
 ## Uso
