@@ -1,0 +1,14 @@
+{
+  "filings": [
+    {
+      "state": "ExampleState",
+      "type": "LLC",
+      "url": "https://example.com/formation",
+      "fields": {
+        "#businessName": "ACME LLC",
+        "#agentName": "John Doe"
+      },
+      "submitSelector": "#submitForm"
+    }
+  ]
+}
