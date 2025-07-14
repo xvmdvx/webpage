@@ -1,0 +1,16 @@
+{
+  "name": "sos-filing-automation",
+  "version": "1.0.0",
+  "description": "Automation tool for filing LLCs and corporations online via Secretary of State websites.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests specified\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "puppeteer": "^24.12.1"
+  }
+}
