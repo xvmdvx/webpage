@@ -1,2 +1,4 @@
-node_modules/
+# Optional config file
 config.json
+# Node modules directory (no longer used)
+node_modules/

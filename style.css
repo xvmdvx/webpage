@@ -1,0 +1,40 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+  color: #333;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: #ececec;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#journey {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+canvas {
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
+#controls {
+  margin-top: 1rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  font-size: 1rem;
+}
