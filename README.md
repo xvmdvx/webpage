@@ -1,28 +1,14 @@
-# SOS Filing Automation
+# Auto Iniciación en la Geometría Sagrada
 
-This project automates the submission of LLC or corporate formation documents on Secretary of State (SOS) websites. It is built with Node.js and [Puppeteer](https://pptr.dev/).
+Este proyecto es un sitio web interactivo que guía al usuario a través de los primeros pasos en la geometría sagrada. Está inspirado en la filosofía de experiencias inmersivas, similar a emergenceprojects.com, pero desarrollado desde cero.
 
-## Setup
-1. Install dependencies:
-   ```sh
-   npm install
-   ```
-2. Copy `config.example.json` to `config.json` and adjust the values for the state and form you want to automate.
+## Contenido
+- Lienzo interactivo con representaciones del círculo, la Semilla de la Vida y la Flor de la Vida.
+- Botones para avanzar de manera guiada por las distintas etapas de iniciación.
 
-## Configuration
-`config.json` describes one or more filings. Each filing entry contains:
-- `url` – the web page where the form starts.
-- `fields` – an object mapping CSS selectors to the values to enter.
-- `submitSelector` – (optional) selector of the element that submits the form.
+## Uso
+1. Abre `index.html` en tu navegador.
+2. Presiona **Comenzar** para iniciar el recorrido.
+3. Utiliza **Siguiente Paso** para avanzar por las figuras y completar la introducción.
 
-See `config.example.json` for a template.
-
-## Usage
-Run the script with a configuration file:
-```sh
-node index.js config.json
-```
-The script navigates to each URL, fills the specified fields and clicks the submit button if provided.
-
-## Flexibility
-All selectors and URLs reside in the configuration file so the automation can adapt to different state websites without changing code.
+No se requieren dependencias ni servidores externos; todo funciona de forma local en el navegador.
