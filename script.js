@@ -198,7 +198,50 @@ function drawDivineLine() {
 }
 
 function drawMetatron() {
-  // Por ahora reutilizamos la Flor de la Vida como base
-  drawFlowerOfLife();
-  // Se pueden añadir detalles adicionales en fases futuras
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+  const r = 80;
+
+  const circles = [];
+  for (let i = 0; i < 6; i++) {
+    const angle = i * Math.PI / 3;
+    circles.push({
+      x: centerX + r * Math.cos(angle),
+      y: centerY + r * Math.sin(angle)
+    });
+  }
+  for (let i = 0; i < 6; i++) {
+    const angle = i * Math.PI / 3;
+    circles.push({
+      x: centerX + 2 * r * Math.cos(angle),
+      y: centerY + 2 * r * Math.sin(angle)
+    });
+  }
+  circles.push({ x: centerX, y: centerY });
+
+  let idx = 0;
+  function next() {
+    if (idx < circles.length) {
+      const c = circles[idx++];
+      animateCircle(c.x, c.y, r, 300, next);
+    } else {
+      drawConnections();
+    }
+  }
+
+  function drawConnections() {
+    for (let i = 0; i < circles.length; i++) {
+      for (let j = i + 1; j < circles.length; j++) {
+        animateLine(
+          circles[i].x,
+          circles[i].y,
+          circles[j].x,
+          circles[j].y,
+          200
+        );
+      }
+    }
+  }
+
+  next();
 }

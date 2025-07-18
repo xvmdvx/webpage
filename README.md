@@ -25,3 +25,4 @@ El recorrido propuesto se inspira en la obra *Geometría Sagrada* y en la experi
 7. **Cubo de Metatrón** – integración final de las formas.
 
 Todas las fases cuentan ahora con dibujos animados básicos y la opción de cambiar el tema de colores.
+La séptima fase traza además las líneas entre los trece círculos para formar el Cubo de Metatrón.
