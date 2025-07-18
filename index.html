@@ -10,6 +10,8 @@
     .light {background:#fff;color:#000;}
     .gold {background:#f5f5dc;color:#b8860b;}
     .text {opacity:0;}
+    .shape {opacity:0;}
+    .dot {width:10px;height:10px;background:currentColor;border-radius:50%;}
     canvas {max-width:80vw;max-height:50vh;}
   </style>
 </head>
@@ -19,59 +21,77 @@
     <div class="text">"Un océano infinito sin forma definida."</div>
   </section>
   <section id="one" class="light">
-    <div class="dot" style="width:10px;height:10px;background:#000;border-radius:50%;"></div>
+    <div class="dot shape"></div>
     <div class="text">La Unidad comienza a diferenciarse.</div>
   </section>
   <section id="two" class="dark">
     <div class="dots" style="display:flex;gap:50px;">
-      <div class="dot" style="width:10px;height:10px;background:#fff;border-radius:50%;"></div>
-      <div class="dot" style="width:10px;height:10px;background:#666;border-radius:50%;"></div>
+      <div class="dot shape" style="background:#fff;"></div>
+      <div class="dot shape" style="background:#666;"></div>
     </div>
     <div class="text">Luz/Oscuridad, Yo/No-Yo.</div>
   </section>
   <section id="three" class="light">
-    <svg width="150" height="100">
-      <line x1="10" y1="50" x2="140" y2="50" stroke="black"/>
+    <svg class="shape" width="150" height="130" viewBox="0 0 100 86">
+      <polygon points="50,5 95,80 5,80" fill="none" stroke="currentColor"/>
     </svg>
     <div class="text">El Logos, la relación.</div>
   </section>
   <section id="four" class="dark">
-    <svg width="150" height="150">
-      <circle cx="50" cy="75" r="40" stroke="white" fill="transparent"/>
-      <circle cx="100" cy="75" r="40" stroke="white" fill="transparent"/>
-      <line x1="75" y1="10" x2="75" y2="140" stroke="white"/>
-      <line x1="10" y1="75" x2="140" y2="75" stroke="white"/>
+    <svg class="shape" width="150" height="150">
+      <circle cx="50" cy="75" r="40" stroke="currentColor" fill="transparent"/>
+      <circle cx="100" cy="75" r="40" stroke="currentColor" fill="transparent"/>
+      <line x1="75" y1="10" x2="75" y2="140" stroke="currentColor"/>
+      <line x1="10" y1="75" x2="140" y2="75" stroke="currentColor"/>
     </svg>
     <div class="text">Mandorla, Vesica Piscis.</div>
   </section>
   <section id="five" class="gold">
+    <svg class="shape" width="140" viewBox="0 0 100 100">
+      <polygon points="50,5 61,38 95,38 67,59 78,92 50,72 22,92 33,59 5,38 39,38" fill="none" stroke="currentColor"/>
+    </svg>
     <div class="text">Éter, Verbo, vibración.</div>
   </section>
   <section id="six" class="light">
+    <svg class="shape" width="150" viewBox="0 0 100 100">
+      <polygon points="50,5 93,82 7,82" fill="none" stroke="currentColor"/>
+      <polygon points="7,18 93,18 50,95" fill="none" stroke="currentColor"/>
+    </svg>
     <div class="text">Las 6 direcciones del espacio.</div>
   </section>
   <section id="seven" class="light">
+    <div class="shape" style="width:80px;height:80px;border:2px solid currentColor;border-radius:50%"></div>
     <div class="text">El sabbat, el descanso.</div>
   </section>
   <section id="eight" class="dark">
+    <svg class="shape" width="150" viewBox="0 0 100 50">
+      <path d="M10 25c10-20 30-20 40 0s30 20 40 0" fill="none" stroke="currentColor"/>
+    </svg>
     <div class="text">Danza eterna de transformación.</div>
   </section>
   <section id="nine" class="light">
+    <div class="shape" style="width:80px;height:80px;border:2px solid currentColor;border-radius:50%"></div>
     <div class="text">El retorno al origen.</div>
   </section>
 <script src="node_modules/gsap/dist/gsap.min.js"></script>
 <script src="node_modules/gsap/dist/ScrollTrigger.min.js"></script>
 <script>
-  gsap.utils.toArray('section').forEach((sec, i) => {
-    gsap.to(sec.querySelectorAll('.text'), {
-      opacity: 1,
-      duration: 1,
-      scrollTrigger: {
-        trigger: sec,
-        start: 'top center',
-        toggleActions: 'play none none reverse'
+  gsap.utils.toArray('section').forEach((sec) => {
+    gsap.fromTo(sec.querySelectorAll('.text, .shape'),
+      {y: 50, opacity: 0, scale: 0.8},
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: sec,
+          start: 'top center',
+          toggleActions: 'play none none reverse'
+        }
       }
-    });
+    );
   });
 </script>
 </body>
