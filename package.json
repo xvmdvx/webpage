@@ -1,0 +1,16 @@
+{
+  "name": "webpage",
+  "version": "1.0.0",
+  "description": "Este repositorio contiene una página web muy sencilla que simplemente muestra **HOLA MUNDO**.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "gsap": "^3.13.0"
+  }
+}
