@@ -12,6 +12,10 @@ requestAnimationFrame(raf);
 const morphPath = document.getElementById('morphPath');
 function morph(to) {
   const from = morphPath.getAttribute('d');
+  if (!from) {
+    morphPath.setAttribute('d', to);
+    return;
+  }
   const interp = flubber.interpolate(from, to);
   gsap.to({ t: 0 }, {
     t: 1,
@@ -77,9 +81,8 @@ function stopParticles() {
   }
 }
 
-// Animations per section
-const sections = gsap.utils.toArray('section');
-sections.forEach((sec, i) => {
+// Triggered animation per section
+function animateSection(sec, index) {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: sec,
@@ -90,16 +93,16 @@ sections.forEach((sec, i) => {
       toggleActions: 'play reverse play reverse',
       onEnter: () => {
         if (sec.dataset.shape) morph(sec.dataset.shape);
-        playSound(i);
-        if (i === 5 || i === 8) startParticles();
+        playSound(index);
+        if (index === 5 || index === 8) startParticles();
       },
-      onLeave: () => { if (i === 5 || i === 8) stopParticles(); },
+      onLeave: () => { if (index === 5 || index === 8) stopParticles(); },
       onEnterBack: () => {
         if (sec.dataset.shape) morph(sec.dataset.shape);
-        playSound(i);
-        if (i === 5 || i === 8) startParticles();
+        playSound(index);
+        if (index === 5 || index === 8) startParticles();
       },
-      onLeaveBack: () => { if (i === 5 || i === 8) stopParticles(); }
+      onLeaveBack: () => { if (index === 5 || index === 8) stopParticles(); }
     }
   });
 
@@ -107,6 +110,7 @@ sections.forEach((sec, i) => {
     const split = new SplitType(t, { types: 'words' });
     tl.from(split.words, { opacity: 0, y: 20, stagger: 0.05, duration: 1 }, 0);
   });
+
   tl.from(sec.querySelectorAll('.shape'), { y: 50, opacity: 0, scale: 0.8, duration: 1 }, 0);
 
   if (sec.dataset.breath) {
@@ -119,7 +123,10 @@ sections.forEach((sec, i) => {
             .call(() => breathText.textContent = 'Inhala', [], 6);
     tl.add(breathTl, 0);
   }
-});
+}
+
+// Initialize animations for all sections
+gsap.utils.toArray('section').forEach((sec, i) => animateSection(sec, i));
 
 // Navigation menu
 const nav = document.getElementById('side-nav');
@@ -127,5 +134,16 @@ const toggle = document.getElementById('nav-toggle');
 toggle.addEventListener('click', () => {
   const open = nav.classList.toggle('open');
   gsap.to(nav, { x: open ? 200 : 0, duration: 0.3 });
+});
+
+// Smooth scrolling for nav links
+nav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    nav.classList.remove('open');
+    gsap.to(nav, { x: 0, duration: 0.3 });
+    lenis.scrollTo(target);
+  });
 });
 
