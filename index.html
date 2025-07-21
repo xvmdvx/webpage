@@ -17,35 +17,55 @@
     canvas {max-width:80vw;max-height:50vh;}
     #morpher{position:fixed;top:10%;left:50%;transform:translateX(-50%);pointer-events:none;}
     #particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1;}
+    #nav-toggle{position:fixed;top:20px;left:20px;z-index:10;background:none;border:none;color:inherit;font-size:24px;cursor:pointer;}
+    #side-nav{position:fixed;top:0;left:-200px;width:200px;height:100%;background:rgba(0,0,0,0.8);color:#fff;padding:40px 10px;box-sizing:border-box;z-index:9;}
+    #side-nav.open{left:0;}
+    #side-nav ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+    #side-nav a{color:inherit;text-decoration:none;font-size:20px;}
   </style>
 </head>
 <body>
+  <button id="nav-toggle">☰</button>
+  <nav id="side-nav">
+    <ul>
+      <li><a href="#zero">0</a></li>
+      <li><a href="#one">1</a></li>
+      <li><a href="#two">2</a></li>
+      <li><a href="#three">3</a></li>
+      <li><a href="#four">4</a></li>
+      <li><a href="#five">5</a></li>
+      <li><a href="#six">6</a></li>
+      <li><a href="#seven">7</a></li>
+      <li><a href="#eight">8</a></li>
+      <li><a href="#nine">9</a></li>
+    </ul>
+  </nav>
   <canvas id="particles"></canvas>
   <svg id="morpher" viewBox="0 0 100 100" width="150">
     <path id="morphPath" fill="none" stroke="currentColor"/>
   </svg>
-  <section id="zero" class="dark">
+  <section id="zero" class="section-zero dark">
     <div class="text">~ Potencial en estado puro ~</div>
     <div class="text">"Un océano infinito sin forma definida."</div>
   </section>
-  <section id="one" class="light">
+  <section id="one" class="section-one light">
     <div class="dot shape"></div>
     <div class="text">La Unidad comienza a diferenciarse.</div>
   </section>
-  <section id="two" class="dark">
+  <section id="two" class="section-two dark">
     <div class="dots" style="display:flex;gap:50px;">
       <div class="dot shape" style="background:#fff;"></div>
       <div class="dot shape" style="background:#666;"></div>
     </div>
     <div class="text">Luz/Oscuridad, Yo/No-Yo.</div>
   </section>
-  <section id="three" class="light" data-shape="M50 5 L95 80 L5 80 Z">
+  <section id="three" class="section-three light" data-shape="M50 5 L95 80 L5 80 Z">
     <svg class="shape" width="150" height="130" viewBox="0 0 100 86">
       <polygon points="50,5 95,80 5,80" fill="none" stroke="currentColor"/>
     </svg>
     <div class="text">El Logos, la relación.</div>
   </section>
-  <section id="four" class="dark" data-shape="M50 20A30 30 0 0 1 80 50A30 30 0 0 1 50 80A30 30 0 0 1 20 50A30 30 0 0 1 50 20Z">
+  <section id="four" class="section-four dark" data-shape="M50 20A30 30 0 0 1 80 50A30 30 0 0 1 50 80A30 30 0 0 1 20 50A30 30 0 0 1 50 20Z">
     <svg class="shape" width="150" height="150">
       <circle cx="50" cy="75" r="40" stroke="currentColor" fill="transparent"/>
       <circle cx="100" cy="75" r="40" stroke="currentColor" fill="transparent"/>
@@ -54,30 +74,30 @@
     </svg>
     <div class="text">Mandorla, Vesica Piscis.</div>
   </section>
-  <section id="five" class="gold" data-shape="M50 5 L61 38 L95 38 L67 59 L78 92 L50 72 L22 92 L33 59 L5 38 L39 38 Z">
+  <section id="five" class="section-five gold" data-shape="M50 5 L61 38 L95 38 L67 59 L78 92 L50 72 L22 92 L33 59 L5 38 L39 38 Z">
     <svg class="shape" width="140" viewBox="0 0 100 100">
       <polygon points="50,5 61,38 95,38 67,59 78,92 50,72 22,92 33,59 5,38 39,38" fill="none" stroke="currentColor"/>
     </svg>
     <div class="text">Éter, Verbo, vibración.</div>
   </section>
-  <section id="six" class="light" data-shape="M50 5 L93 82 L7 82 Z M7 18 L93 18 L50 95 Z">
+  <section id="six" class="section-six light" data-shape="M50 5 L93 82 L7 82 Z M7 18 L93 18 L50 95 Z">
     <svg class="shape" width="150" viewBox="0 0 100 100">
       <polygon points="50,5 93,82 7,82" fill="none" stroke="currentColor"/>
       <polygon points="7,18 93,18 50,95" fill="none" stroke="currentColor"/>
     </svg>
     <div class="text">Las 6 direcciones del espacio.</div>
   </section>
-  <section id="seven" class="light" data-shape="M50 50 m-40 0 a40 40 0 1 0 80 0 a40 40 0 1 0 -80 0" data-breath="true">
+  <section id="seven" class="section-seven light" data-shape="M50 50 m-40 0 a40 40 0 1 0 80 0 a40 40 0 1 0 -80 0" data-breath="true">
     <div id="breath" class="shape" style="width:80px;height:80px;border:2px solid currentColor;border-radius:50%"></div>
     <div class="breath-text text">Inhala</div>
   </section>
-  <section id="eight" class="dark" data-shape="M10 25c10-20 30-20 40 0s30 20 40 0">
+  <section id="eight" class="section-eight dark" data-shape="M10 25c10-20 30-20 40 0s30 20 40 0">
     <svg class="shape" width="150" viewBox="0 0 100 50">
       <path d="M10 25c10-20 30-20 40 0s30 20 40 0" fill="none" stroke="currentColor"/>
     </svg>
     <div class="text">Danza eterna de transformación.</div>
   </section>
-  <section id="nine" class="light" data-shape="M50 50 m-40 0 a40 40 0 1 0 80 0 a40 40 0 1 0 -80 0">
+  <section id="nine" class="section-nine light" data-shape="M50 50 m-40 0 a40 40 0 1 0 80 0 a40 40 0 1 0 -80 0">
     <div class="shape" style="width:80px;height:80px;border:2px solid currentColor;border-radius:50%"></div>
     <div class="text">El retorno al origen.</div>
   </section>
@@ -86,100 +106,7 @@
 <script src="node_modules/flubber/build/flubber.min.js"></script>
 <script src="node_modules/lenis/dist/lenis.min.js"></script>
 <script src="node_modules/split-type/dist/index.js"></script>
-<script>
-  const lenis = new Lenis({smooth:true});
-  function raf(t){lenis.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);
-
-  const morphPath = document.getElementById('morphPath');
-  const morphSections = gsap.utils.toArray('section[data-shape]');
-  if(morphSections.length) morphPath.setAttribute('d', morphSections[0].dataset.shape);
-
-  function morph(to){
-    const from = morphPath.getAttribute('d');
-    const interp = flubber.interpolate(from, to);
-    gsap.to({t:0},{t:1,duration:1,onUpdate:function(){morphPath.setAttribute('d',interp(this.targets()[0].t));}});
-  }
-
-  morphSections.forEach(sec=>{
-    ScrollTrigger.create({
-      trigger: sec,
-      start: 'top center',
-      onEnter: ()=>morph(sec.dataset.shape),
-      onEnterBack: ()=>morph(sec.dataset.shape)
-
-  gsap.utils.toArray('section').forEach(sec=>{
-    sec.querySelectorAll('.text').forEach(t=>{
-      const split = new SplitType(t,{types:'words'});
-      gsap.from(split.words,{opacity:0,y:20,stagger:0.05,duration:1,
-        scrollTrigger:{trigger:sec,start:'top center',toggleActions:'play reverse play reverse'}});
-    gsap.from(sec.querySelectorAll('.shape'),{y:50,opacity:0,scale:0.8,duration:1,
-      scrollTrigger:{trigger:sec,start:'top center',toggleActions:'play reverse play reverse'}});
-
-  const canvas = document.getElementById('particles');
-  const ctx = canvas.getContext('2d');
-  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
-  window.addEventListener('resize',resize);resize();
-  const particles=Array.from({length:30},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,dx:(Math.random()-0.5)*0.5,dy:(Math.random()-0.5)*0.5}));
-  function animParticles(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle='rgba(255,255,255,0.3)';
-    particles.forEach(p=>{p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>canvas.width)p.dx*=-1;if(p.y<0||p.y>canvas.height)p.dy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,2,0,Math.PI*2);ctx.fill();});
-    requestAnimationFrame(animParticles);
-  }
-  animParticles();
-
-  const breathCircle=document.getElementById('breath');
-  const breathText=document.querySelector('.breath-text');
-  const breathTl=gsap.timeline({paused:true,repeat:-1});
-  breathTl.to(breathCircle,{scale:1.2,duration:3,ease:'sine.inOut'})
-          .to(breathCircle,{scale:1,duration:3,ease:'sine.inOut'});
-  breathTl.call(()=>breathText.textContent='Exhala',[],3)
-          .call(()=>breathText.textContent='Inhala',[],6);
-
-  ScrollTrigger.create({trigger:'#seven',start:'top center',onEnter:()=>breathTl.play(),onLeaveBack:()=>breathTl.pause()});
-
-  let audioCtx;
-  function getCtx(){
-    if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-    return audioCtx;
-  }
-
-  function playNoise(){
-    const ctx = getCtx();
-    const buffer = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-    for(let i=0;i<data.length;i++) data[i] = Math.random()*2-1;
-    const src = ctx.createBufferSource();
-    src.buffer = buffer;
-    src.loop = true;
-    src.connect(ctx.destination);
-    src.start();
-    return src;
-  }
-
-  function playSine(freq){
-    const ctx = getCtx();
-    const osc = ctx.createOscillator();
-    osc.type = 'sine';
-    osc.frequency.value = freq || 440;
-    osc.connect(ctx.destination);
-    osc.start();
-    return osc;
-  }
-
-  let currentSound;
-  function playSound(id){
-    if(currentSound){try{currentSound.stop();}catch(e){} currentSound.disconnect();}
-    currentSound=null;
-    if(id==='zero') currentSound = playNoise();
-    if(id==='five') currentSound = playSine(220);
-  }
-
-  document.addEventListener('click', ()=>{if(audioCtx && audioCtx.state==='suspended') audioCtx.resume();}, {once:true});
-
-  gsap.utils.toArray('section').forEach(sec=>{
-    ScrollTrigger.create({trigger:sec,start:'top center',onEnter:()=>playSound(sec.id),onEnterBack:()=>playSound(sec.id)});
-  });
-</script>
+<script src="node_modules/howler/dist/howler.min.js"></script>
+<script type="module" src="main.js"></script>
 </body>
 </html>
